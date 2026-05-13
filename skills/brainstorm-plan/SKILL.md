@@ -29,8 +29,8 @@ Complete these items in order:
 1. **Explore project context** - check relevant files, docs, existing plans, and recent Git state when available.
 2. **Assess scope** - if the request spans independent subsystems, decompose before planning.
 3. **Ask clarifying questions** - one at a time, until purpose, constraints, success criteria, and boundaries are clear.
-4. **Propose 2-3 approaches** - include trade-offs and a recommendation when more than one path is plausible.
-5. **Present design** - section by section, scaled to complexity, and get user approval.
+4. **Propose 2-3 approaches** - include trade-offs and your recommendation before settling.
+5. **Present design** - in sections scaled to their complexity, get user approval after each section.
 6. **Write final PlanForge plan** - save to `docs/planforge/plans/YYYY-MM-DD-topic.md`.
 7. **Self-review the plan** - check placeholders, contradictions, scope, ambiguity, and execution compatibility.
 8. **User review gate** - ask the user to review the written plan before execution.
@@ -47,14 +47,14 @@ Complete these items in order:
 
 ## Exploring Approaches
 
-- Propose 2-3 approaches when there is a real design choice.
+- Propose 2-3 different approaches before settling.
 - Lead with your recommendation and explain why.
 - Include trade-offs in terms of complexity, risk, user experience, maintainability, and verification.
-- If only one approach is sensible, say why and keep the design concise.
+- If only one approach is truly sensible, explicitly say why alternatives are not useful before continuing.
 
 ## Presenting The Design
 
-When you understand what is being built, present the design in sections. Scale each section to the work.
+When you understand what is being built, present the design in sections. Scale each section to the work: a few sentences if straightforward, up to 200-300 words if nuanced.
 
 Cover what matters for the task:
 
@@ -66,7 +66,7 @@ Cover what matters for the task:
 - testing and verification;
 - rollout or migration concerns when relevant.
 
-Ask whether each section looks right before moving on when the design is non-trivial. Be ready to revise when the user corrects the direction.
+Do not present the whole design in one large message. Ask after each section whether it looks right so far. If the user says no or adjusts it, revise that section before moving on. Only write the final PlanForge plan after all design sections are approved.
 
 ## Design For Isolation And Clarity
 
