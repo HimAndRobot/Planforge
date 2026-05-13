@@ -13,14 +13,16 @@ One final plan file is the default. It contains both spec/design and implementat
 Every plan starts with:
 
 ```markdown
-# [Plan Name]
+# [Plan Name] Implementation Plan
 
-> **For agentic workers:** This plan is the source of truth. Execute task-by-task using subagent mode or inline mode. Do not create commits. Ask once before creating a branch during execution. Keep checklist status updated.
+> **For agentic workers:** This plan is the source of truth. Execute task-by-task using PlanForge `execute-plan` in subagent mode or inline mode. Do not create commits. Ask once before creating a branch during execution. Do not use the `codex/` branch prefix unless the user explicitly asks for it. Keep checklist status updated.
 
 **Mode:** brainstorm-plan | brainstorm-fix | rework-plan
 **Goal:** [One sentence]
-**Architecture:** [Short implementation approach]
+**Architecture:** [2-3 sentences about the approach]
 **Tech Stack:** [Project technologies]
+
+---
 ```
 
 ## Required Sections
@@ -29,11 +31,28 @@ Include these sections:
 
 - Product/spec summary
 - Design decisions
+- Architecture and components
+- Data or state flow when relevant
+- Error handling
 - Boundaries and non-goals
 - Implementation tasks
 - Verification checklist
 - Final review instructions
 - Risks and concerns
+
+## File Structure Section
+
+Before task decomposition, map expected files:
+
+```markdown
+## File Structure
+
+- Create: `path/to/file` - responsibility.
+- Modify: `path/to/file` - responsibility.
+- Inspect: `path/to/file` - why it matters.
+```
+
+Use likely files when exact paths require implementation-time discovery.
 
 ## Task Shape
 
@@ -79,4 +98,18 @@ Each task uses this structure:
 - Do not prewrite large file contents unless exact text is essential.
 - Do not include automatic commit steps.
 - Keep tasks small enough for either a subagent or the inline executor.
+- Prefer TDD or regression-test-first task ordering when practical.
+- Include exact commands and expected results when known.
+- If commands are unknown, instruct the executor to discover project-standard checks before completion.
 - Write plans for agents and humans: clear, concrete, and bounded.
+
+## Self-Review Rules
+
+Before presenting a plan:
+
+- Check spec coverage.
+- Scan for placeholders.
+- Check type and naming consistency.
+- Check execution order.
+- Check verification coverage.
+- Check compatibility with `execute-plan`.

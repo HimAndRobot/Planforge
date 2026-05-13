@@ -15,6 +15,8 @@ Provide the reviewer:
 - verification commands and results;
 - known concerns or skipped checks.
 
+Do not pass the whole conversation history when a focused work product is enough.
+
 ## Review Scope
 
 The reviewer checks:
@@ -40,3 +42,5 @@ If there are no findings, the reviewer should say that clearly and mention resid
 ## After Review
 
 The orchestrator fixes valid Critical and Important findings, decides whether Minor findings belong in scope, then reruns fresh verification before claiming completion.
+
+Do not claim the work is complete until fresh verification supports that claim.

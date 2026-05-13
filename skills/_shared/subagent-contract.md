@@ -2,13 +2,18 @@
 
 Use this reference when executing a PlanForge plan in subagent mode.
 
-PlanForge keeps the Superpowers dispatch mechanics because they are reliable:
+PlanForge keeps the Superpowers dispatch mechanics because they are reliable. The review strategy is simplified, but subagent context discipline should stay strong.
 
-- The orchestrator reads the plan.
-- The orchestrator extracts the current task and shared context.
-- The orchestrator gives the implementer subagent the full task text and only the needed context.
+## Core Principles
+
+- Fresh implementer subagent per task.
+- Implementers get curated context, not the orchestrator's session history.
+- The orchestrator reads the plan and extracts the task.
+- The orchestrator gives the implementer the full task text and only the needed shared context.
 - The implementer should not have to read the whole plan independently.
-- The implementer reports a clear status.
+- The implementer may ask questions before or during work.
+- The orchestrator answers questions clearly before letting work continue.
+- Do not dispatch implementation subagents in parallel when their edits may conflict.
 
 ## Implementer Prompt Requirements
 
@@ -35,9 +40,9 @@ Implementers must finish with one of:
 
 ## Orchestrator Handling
 
-If status is `DONE`, review locally and continue if the task meets the plan.
+If status is `DONE`, inspect changed files, review verification evidence, and continue only if the task meets the plan.
 
-If status is `DONE_WITH_CONCERNS`, read concerns before continuing. Fix small issues directly or send a short corrective follow-up.
+If status is `DONE_WITH_CONCERNS`, read concerns before continuing. If the concern affects correctness or scope, address it before moving on.
 
 If status is `NEEDS_CONTEXT`, provide missing context and redispatch.
 
@@ -47,6 +52,8 @@ If status is `BLOCKED`, choose one:
 - split the task smaller;
 - use a stronger model if available;
 - stop and ask the user if the blocker is genuinely ambiguous.
+
+Never force the same retry after `BLOCKED` without changing context, task shape, or model capability.
 
 ## Per-Task Review
 
@@ -60,3 +67,5 @@ The orchestrator reviews each task for:
 - verification result;
 - obvious code quality problems;
 - no automatic commits.
+
+The final separate review agent handles the deeper review after all tasks.
