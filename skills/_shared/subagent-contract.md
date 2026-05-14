@@ -10,6 +10,7 @@ PlanForge keeps the Superpowers dispatch mechanics because they are reliable. Th
 - Implementers get curated context, not the orchestrator's session history.
 - The orchestrator reads the plan and extracts the task.
 - The orchestrator gives the implementer the full task text and only the needed shared context.
+- The orchestrator gathers task context before dispatching the implementer, or after the implementer reports back during review before the next task.
 - The implementer should not have to read the whole plan independently.
 - The implementer may ask questions before or during work.
 - The orchestrator answers questions clearly before letting work continue.
@@ -82,6 +83,6 @@ The orchestrator reviews each task for:
 
 The orchestrator corrects valid per-task issues after review. Small corrections may be edited directly. Larger missing implementation should become a focused corrective task instead of hidden "central integration" work.
 
-The orchestrator is not an extra parallel implementer. While implementer subagents are running, it should coordinate, answer questions, prepare context, and inspect completed work; it must not independently implement other plan tasks in parallel.
+The orchestrator is not an extra parallel implementer or side investigator. While an implementer subagent is running, it should wait, answer implementer questions, and keep coordination state. It should tell the user it is waiting for the implementer rather than claiming it is doing side work. It must not read files, inspect another part of the app, trace UI/backend integration paths, prepare hidden implementation, or implement other plan tasks in parallel. Read and review after the implementer reports back, then resolve issues before starting the next task. If the active implementer needs missing context, gather only that requested context and hand it back to the implementer.
 
 The final separate review agent handles the deeper review after all tasks.

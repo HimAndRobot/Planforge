@@ -39,6 +39,9 @@ Complete these items in order:
 ## Understanding The Idea
 
 - Inspect the current project first. Prefer concrete context over assumptions.
+- If the request changes, extends, or adds to an existing feature, inspect enough of the existing code/docs/UI to understand what already exists before asking product-design questions or proposing approaches.
+- After inspecting existing context, briefly tell the user what appears to already exist and frame questions around gaps, intended changes, and constraints. Do not describe already-built pieces as new work.
+- Do not get stuck in endless discovery. Inspect the relevant area, name any uncertainty, ask one focused question if needed, then continue the brainstorming flow.
 - If the project is too large for one plan, help decompose it into sub-projects and plan the first useful slice.
 - Ask one question per message.
 - Prefer multiple-choice questions when that makes answering easier; open-ended is fine when needed.
@@ -81,7 +84,9 @@ Prefer boundaries that let an executing agent work task-by-task without holding 
 
 ## Existing Codebases
 
+- Before proposing changes, identify the current implementation surface: relevant files, existing components/functions/routes/config, tests, docs, and conventions.
 - Follow existing patterns before inventing new ones.
+- Treat the plan as an increment on top of the current system unless the user explicitly asks for a rewrite or greenfield build.
 - If existing structure is tangled and affects the work, include targeted improvements in the plan.
 - Do not propose unrelated refactors.
 - If the user already approved prior design details in the conversation, do not restart the brainstorm; continue from that approval.

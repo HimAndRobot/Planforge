@@ -61,6 +61,7 @@ Keep the rest of the Superpowers mechanics:
 - Fresh implementer subagent per task, executed sequentially.
 - Implementers receive curated context, not the orchestrator's session history.
 - The orchestrator provides the full task text, relevant design decisions, boundaries, likely files, and verification expectations.
+- Any codebase exploration needed to frame a task must happen before dispatching that task, as part of context curation, or after the implementer reports back as part of review before the next task.
 - The implementer should not have to read the whole plan independently.
 - Implementers may ask questions before or during work; answer before letting them proceed.
 - Implementers implement, test, verify, self-review, and report back.
@@ -86,6 +87,8 @@ Each implementer must report:
 9. Update checklist status and continue to the next task.
 
 The orchestrator must not invent a new "central integration" feature slice after subagents finish. If substantial integration work is required, it must already be an explicit plan task or become a focused corrective task. Integration after subagents means reviewing, reconciling, fixing valid issues, updating checklists, and verifying the planned work.
+
+While an implementer is working, the orchestrator stays in the Superpowers controller role: it waits for the implementer report, answers implementer questions, and keeps coordination state. It should tell the user it is waiting for the implementer rather than claiming it will work "around" the task. Do not read files, trace integration paths, or inspect another area of the codebase in parallel. Read/review only after the implementer reports back, then resolve issues before starting the next task. If the active implementer needs missing context, gather only that requested context and give it back to the implementer.
 
 ## Implementer Prompt Requirements
 
@@ -134,6 +137,7 @@ Never:
 - ignore subagent questions;
 - force the same retry after `BLOCKED` without changing context or approach;
 - let the implementer self-review replace orchestrator review;
+- read files, trace integration paths, or inspect another code area in parallel while an implementer is working;
 - implement plan tasks in parallel as an extra implementer while subagents are running;
 - dispatch multiple implementation subagents in parallel;
 - invent unplanned central implementation work after subagents finish;
